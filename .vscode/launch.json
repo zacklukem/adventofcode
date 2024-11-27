@@ -1,0 +1,26 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "mix_task",
+      "name": "Debug 2023",
+      "request": "launch",
+      "task": "run",
+      "taskArgs": ["debug.exs"],
+      "startApps": true,
+      "projectDir": "${workspaceRoot}/2023"
+    },
+    {
+      "type": "mix_task",
+      "name": "Debug 2024",
+      "request": "launch",
+      "task": "run",
+      "taskArgs": ["debug.exs"],
+      "startApps": true,
+      "projectDir": "${workspaceRoot}/2024"
+    }
+  ]
+}
