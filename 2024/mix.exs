@@ -21,7 +21,8 @@ defmodule Aoc2024.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      libgraph: "~> 0.16.0"
+      {:libgraph, "~> 0.16.0"},
+      {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false}
     ]
   end
 end

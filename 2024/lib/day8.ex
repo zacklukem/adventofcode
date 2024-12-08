@@ -55,6 +55,11 @@ defmodule Day8a do
 end
 
 defmodule Day8b do
+  @type pos() :: {integer, integer}
+
+  @spec pair_antinodes(MapSet.t(), pos, pos, pos) :: MapSet.t()
+  def pair_antinodes(set, pos, delta, maxs)
+
   def pair_antinodes(set, {x, y}, _, {xmax, ymax})
       when x < 0 or x >= xmax or y < 0 or y >= ymax do
     set
@@ -63,6 +68,9 @@ defmodule Day8b do
   def pair_antinodes(set, {x, y}, {dx, dy}, {xmax, ymax}) do
     pair_antinodes(MapSet.put(set, {x, y}), {x + dx, y + dy}, {dx, dy}, {xmax, ymax})
   end
+
+  @spec freq_antinodes([pos], [pos], MapSet.t(), pos) :: MapSet.t()
+  def freq_antinodes(antenna, prev, acc, maxs)
 
   def freq_antinodes([], _, acc, _) do
     acc
@@ -83,6 +91,7 @@ defmodule Day8b do
     freq_antinodes(rest, [pos1 | prev], acc, maxs)
   end
 
+  @spec run() :: integer
   def run do
     input =
       File.read!(".input.txt")
