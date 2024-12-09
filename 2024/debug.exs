@@ -1,1 +1,1 @@
-IO.inspect(Day6a.run())
+IO.inspect(Day9b.run())
