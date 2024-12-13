@@ -22,7 +22,9 @@ defmodule Aoc2024.MixProject do
   defp deps do
     [
       {:libgraph, "~> 0.16.0"},
-      {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false}
+      {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false},
+      {:nx, "~> 0.5"},
+      {:decimal, "~> 2.0"}
     ]
   end
 end
