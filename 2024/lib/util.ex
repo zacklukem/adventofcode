@@ -15,15 +15,52 @@ defmodule TVec do
 
   @spec map(t2(), (number() -> number())) :: t2()
   def map({x, y}, fun), do: {fun.(x), fun.(y)}
+
+  def rot_cw({x, y}) do
+    {-y, x}
+  end
+
+  def rot_ccw({x, y}) do
+    {y, -x}
+  end
+
+  def invert({x, y}) do
+    {-x, -y}
+  end
+
+  def dirs(opts \\ [])
+
+  def dirs(diagonal: true) do
+    [{0, 1}, {0, -1}, {1, 0}, {-1, 0}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}]
+  end
+
+  def dirs(_) do
+    [{0, 1}, {-1, 0}, {0, -1}, {1, 0}]
+  end
 end
 
 defmodule Grid do
-  def gridify(str) do
-    str |> String.split("\n") |> Enum.map(&String.to_charlist/1)
+  def gridify(str, map \\ & &1) do
+    str
+    |> String.split("\n")
+    |> Enum.map(fn row -> row |> String.to_charlist() |> Enum.map(map) end)
   end
 
-  def gridify_tuple(str) do
-    gridify(str) |> Enum.map(&List.to_tuple/1) |> List.to_tuple()
+  def gridify_tuple(str, map \\ & &1) do
+    gridify(str, map)
+    |> Enum.map(&List.to_tuple/1)
+    |> List.to_tuple()
+  end
+
+  def indices(grid) do
+    0..(tuple_size(grid) - 1)
+    |> Enum.reduce([], fn y, list ->
+      0..(tuple_size(elem(grid, y)) - 1)
+      |> Enum.reduce(list, fn x, list ->
+        [{x, y} | list]
+      end)
+    end)
+    |> Enum.reverse()
   end
 
   def set(grid, {x, y}, _)
