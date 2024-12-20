@@ -73,12 +73,14 @@ defmodule Grid do
     grid |> put_elem(y, row)
   end
 
-  def get(grid, {x, y})
+  def get(_grid, _pos, _default \\ nil)
+
+  def get(grid, {x, y}, default)
       when x < 0 or y < 0 or x >= tuple_size(elem(grid, 0)) or y >= tuple_size(grid) do
-    nil
+    default
   end
 
-  def get(grid, {x, y}) do
+  def get(grid, {x, y}, _default) do
     grid |> elem(y) |> elem(x)
   end
 end
