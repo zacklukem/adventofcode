@@ -95,7 +95,11 @@ defmodule Day21a do
   end
 
   def run do
-    File.read!(".input.txt")
+    File.read!(".input.txt") |> run
+  end
+
+  def run(input) do
+    input
     |> String.split("\n")
     |> Enum.map(fn code ->
       state = ~c"AAA"
@@ -242,7 +246,11 @@ defmodule Day21b do
   end
 
   def run do
-    File.read!(".input.txt")
+    File.read!(".input.txt") |> run
+  end
+
+  def run(input) do
+    input
     |> String.split("\n")
     |> Enum.map(fn code ->
       state = 0..25 |> Enum.map(fn _ -> ?A end)
