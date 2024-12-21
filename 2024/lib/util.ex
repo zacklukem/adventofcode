@@ -37,6 +37,10 @@ defmodule TVec do
   def dirs(_) do
     [{0, 1}, {-1, 0}, {0, -1}, {1, 0}]
   end
+
+  def manhattan({x1, y1}, {x2, y2}) do
+    abs(x1 - x2) + abs(y1 - y2)
+  end
 end
 
 defmodule Grid do
