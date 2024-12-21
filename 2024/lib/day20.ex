@@ -132,7 +132,7 @@ defmodule Day20b do
     |> Enum.filter(&(&1 !== pos and distances[&1] != nil))
   end
 
-  def cheats_starting_at(cheats, grid, p1, distances) do
+  def cheats_starting_at(cheats, _grid, p1, distances) do
     max_dist1 = distances[p1]
 
     ending_pos_within_20(p1, distances)
