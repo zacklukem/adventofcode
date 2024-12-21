@@ -1,5 +1,4 @@
 defmodule Day20a do
-
   def djikstra(grid, queue, distances) do
     case PriorityQueue.pop(queue) do
       {:empty, _} ->
@@ -13,7 +12,9 @@ defmodule Day20a do
           |> Enum.reduce({queue, distances}, fn dir, {queue, distances} ->
             pos = TVec.add(pos, dir)
             dist = dist + 1
-            if Grid.get(grid, pos) == ?# or (Map.has_key?(distances, pos) and distances[pos] <= dist) do
+
+            if Grid.get(grid, pos) == ?# or
+                 (Map.has_key?(distances, pos) and distances[pos] <= dist) do
               {queue, distances}
             else
               queue = queue |> PriorityQueue.push(pos, dist)
@@ -48,6 +49,7 @@ defmodule Day20a do
       |> Enum.reduce(cheats, fn p2, cheats ->
         if distances[p2] != nil do
           savings = max_dist1 - distances[p2] - 2
+
           if savings > 0 do
             cheats |> Map.put({p1, p2}, savings)
           else
@@ -97,7 +99,9 @@ defmodule Day20b do
           |> Enum.reduce({queue, distances}, fn dir, {queue, distances} ->
             pos = TVec.add(pos, dir)
             dist = dist + 1
-            if Grid.get(grid, pos) == ?# or (Map.has_key?(distances, pos) and distances[pos] <= dist) do
+
+            if Grid.get(grid, pos) == ?# or
+                 (Map.has_key?(distances, pos) and distances[pos] <= dist) do
               {queue, distances}
             else
               queue = queue |> PriorityQueue.push(pos, dist)
@@ -118,11 +122,11 @@ defmodule Day20b do
   end
 
   def ending_pos_within_20(pos, distances) do
-    (-20..20)
+    -20..20
     |> Enum.flat_map(fn x ->
-      (-20..20)
+      -20..20
       |> Enum.map(&{x, &1})
-      |> Enum.filter(& pico_between(&1, {0,0}) <= 20)
+      |> Enum.filter(&(pico_between(&1, {0, 0}) <= 20))
     end)
     |> Enum.map(&TVec.add(&1, pos))
     |> Enum.filter(&(&1 !== pos and distances[&1] != nil))
@@ -134,6 +138,7 @@ defmodule Day20b do
     ending_pos_within_20(p1, distances)
     |> Enum.reduce(cheats, fn p2, cheats ->
       savings = max_dist1 - distances[p2] - pico_between(p1, p2)
+
       if savings > 0 do
         cheats |> Map.put({p1, p2}, savings)
       else
