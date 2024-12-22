@@ -1,6 +1,16 @@
 #!/bin/bash
 
-day="$(date '+%d')"
+day="$1"
+
+if [ -z "$day" ]; then
+  day="$(date '+%d')"
+fi
+
+if [ -f "lib/day$day.ex" ]; then
+  echo "Day already exists"
+  exit 1
+fi
+
 
 cat > lib/day$day.ex <<- EOM
 defmodule Day${day}a do
